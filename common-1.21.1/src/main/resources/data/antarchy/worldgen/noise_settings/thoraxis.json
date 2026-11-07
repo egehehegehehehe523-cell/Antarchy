@@ -46,7 +46,7 @@
             "min_inclusive": -208,
             "max_exclusive": 8,
             "when_in_range": "antarchy:thoraxis_underside_density",
-            "when_out_of_range": -1.0
+            "when_out_of_range": -1
           }
         }
       },
@@ -54,7 +54,50 @@
         "type": "minecraft:squeeze",
         "argument": {
           "type": "minecraft:interpolated",
-          "argument": "antarchy:thoraxis_terrain"
+          "argument": {
+            "type": "minecraft:mul",
+            "argument1": 0.64,
+            "argument2": {
+              "type": "minecraft:blend_density",
+              "argument": {
+                "type": "minecraft:add",
+                "argument1": 2.5,
+                "argument2": {
+                  "type": "minecraft:add",
+                  "argument1": {
+                    "type": "minecraft:mul",
+                    "argument1": {
+                      "type": "minecraft:y_clamped_gradient",
+                      "from_value": 0,
+                      "from_y": -23,
+                      "to_value": 1,
+                      "to_y": -11
+                    },
+                    "argument2": -2.5
+                  },
+                  "argument2": {
+                    "type": "minecraft:add",
+                    "argument1": 0.9375,
+                    "argument2": {
+                      "type": "minecraft:mul",
+                      "argument1": {
+                        "type": "minecraft:y_clamped_gradient",
+                        "from_value": 1,
+                        "from_y": 208,
+                        "to_value": 0,
+                        "to_y": 256
+                      },
+                      "argument2": {
+                        "type": "minecraft:add",
+                        "argument1": -0.9375,
+                        "argument2": "antarchy:thoraxis_base_3d_noise"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -644,7 +687,7 @@
                 "if_true": {
                   "type": "minecraft:noise_threshold",
                   "max_threshold": 1.7976931348623157e+308,
-                  "min_threshold": 0.0,
+                  "min_threshold": 0,
                   "noise": "minecraft:nether_state_selector"
                 },
                 "then_run": {
@@ -707,7 +750,7 @@
           "if_true": {
             "type": "minecraft:noise_threshold",
             "noise": "antarchy:thoraxis_regime_a",
-            "min_threshold": 0.0,
+            "min_threshold": 0,
             "max_threshold": 1.7976931348623157e+308
           },
           "then_run": {
